@@ -1,28 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layout}" lang="en">
+      layout:decorate="~{layouts/base}" lang="en">
 
-<head><div layout:fragment="metadata" th:remove="tag">
+<th:block layout:fragment="head" th:remove="tag">
     <!-- Start of head content specific to page -->
     <title>404 error</title>
     <!-- End of head content specific to page -->
-</div></head>
+</th:block>
 
 <!-- layout::fragment="content" is heart of ThymeLeaf layout -->
-<body><div layout:fragment="content" th:remove="tag">
-    <div class="index">
-        <div class="center-block" style="margin: 2% 10% 10%; font-family: gilroy,serif;">
-            <div class="col-12" style="text-align: center;">
-                <h1><strong>A 404 error occurred</strong></h1>
-            </div>
+<th:block layout:fragment="body" th:remove="tag">
+    <div class="px-4 py-5 my-5 text-center">
+        <h3 class="display-5 fw-bold">404 error occurred</h3>
 
-            <div class="jumbotron jumbotron-fluid" style="text-align: center; ">
-                <h2>Engineering is on the case!</h2>
-                <a href="/">Go Home</a>
-            </div>
-
+        <div class="jumbotron jumbotron-fluid" style="text-align: center; ">
+            <h4>Engineering is on the case!</h4>
+            <a href="/">Go Home</a>
         </div>
+
     </div>
-</div></body>
+</th:block>>
 
 </html>
