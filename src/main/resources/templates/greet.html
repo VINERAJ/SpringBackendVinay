@@ -3,12 +3,15 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layouts/base}" lang="en">
 
+<head>
 <th:block layout:fragment="head" th:remove="tag">
   <!-- Start of head content specific to page -->
   <title>Greet</title>
   <!-- End of head content specific to page -->
 </th:block>
+</head>
 
+<body>
 <th:block layout:fragment="body" th:remove="tag">
   <!-- Start of body content specific to page -->
   <div class="px-4 py-5 my-5">
@@ -25,5 +28,6 @@
   </div>
   <!-- End of body content specific to page -->
 </th:block>
+</body>
 
 </html>
