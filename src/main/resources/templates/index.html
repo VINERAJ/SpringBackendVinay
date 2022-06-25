@@ -13,23 +13,62 @@
 <body>
 <th:block layout:fragment="body" th:remove="tag">
     <!-- Start of body content specific to page -->
-    <div class="px-4 py-5 my-5">
-        <h1><strong>Java and Spring</strong></h1>
-        <h3><strong>What should Java Developers learn?</strong></h3>
-        <ol>
-            <li>Java 11-17 is used for PBL. Java 8 appears to be College Board standard.  Java features like Reactive Streams, HTTP2 client, JShell, React JS are more recent than 8.</li>
-            <li>GitHub.  Learning to master managing change, branches, pull requests, and more.</li>
-            <li>Development DevOps. Java programmers should have a passion for managing the environment and learning automation (Git, Maven, Docker).</li>
-            <li>REST and Microservices using Spring.  Mastering creating and consuming RESTful APIs</li>
-        </ol>
-        <h3><strong>What is Spring?</strong></h3>
-        <ol>
-            <li>Spring Framework is the most popular application development framework of Java. </li>
-            <li>Spring Boot helps to create a stand-alone application with less configuration.</li>
-            <li>Spring MVC is a model view controller-based web framework under the Spring framework.</li>
-            <li>ThymeLeaf is a server-side Java template engine, supports HTML5 JVM web development, and provides full integration with Spring Framework.</li>
-        </ol>
-        
+    <div class="px-5 py-5 mx-auto">
+        <h1><strong>Java Home Page</strong></h1>
+        <div class="row">
+            <div class="col-4">
+                <div class="card">
+                    <img class="card-img-top" th:src="@{/images/java.png}" alt="Java Development" height="250">
+                    <div class="card-body">
+                    <h5 class="card-title">What should Java Developers learn?</h5>
+                    <p class="card-text">
+                        <ol>
+                            <li>Java 11-17 is used for PBL. Java 8 appears to be College Board standard.  Java features like Reactive Streams, HTTP2 client, JShell, React JS are more recent than 8.</li>
+                            <li>GitHub.  Learning to master managing change, branches, pull requests, and more.</li>
+                            <li>Development DevOps. Java programmers should have a passion for managing the environment and learning automation (Git, Maven, Docker).</li>
+                            <li>REST and Microservice using Spring.  Mastering creating and consuming RESTful APIs</li>
+                        </ol>
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <img class="card-img-top" th:src="@{/images/spring.png}" alt="Spring Development" height="250">
+                    <div class="card-body">
+                    <h5 class="card-title">What is Spring?</h5>
+                    <p class="card-text">
+                        <ol>
+                            <li>Spring Framework is the most popular application development framework of Java. </li>
+                            <li>Spring Boot helps to create a stand-alone application with less configuration.</li>
+                            <li>Spring MVC is a model view controller-based web framework under the Spring framework.</li>
+                            <li>ThymeLeaf is a server-side Java template engine, supports HTML5 JVM web development, and provides full integration with Spring Framework.</li>
+                        </ol>
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <img class="card-img-top" th:src="@{/images/pojo.jpeg}" alt="Java Persistence" height="250">
+                    <div class="card-body">
+                    <h5 class="card-title">Java Backend</h5>
+                    <p class="card-text">
+                        <ol>
+                            <li>How do you create Persistent data?</li>
+                            <li>Plain Old Java Objects (POJO) are Class definitions that are tied to Database with @entity declaration.</li>
+                            <li>Java Persistence API (JPA) are sections of code you define Create, Read, Update, and Dele operations.</li>
+                            <li>Beans, Controller Code, and Business logic interact with JPA to manage data in and out of the Database.</li>
+                        </ol>
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
     <!-- End of body content specific to page -->
 </th:block>
