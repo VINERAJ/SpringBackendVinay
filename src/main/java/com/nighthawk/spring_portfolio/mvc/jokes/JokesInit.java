@@ -18,7 +18,7 @@ public class JokesInit {
         return args -> {
             // Fail safe data validations
 
-            // make sure Joke database is populated with defaults
+            // starting jokes
             final String[] jokesArray = {
                 "If you give someone a program... you will frustrate them for a day; if you teach them how to program... you will frustrate them for a lifetime.",
                 "Q: Why did I divide sin by tan? A: Just cos.",
@@ -40,10 +40,11 @@ public class JokesInit {
                 "An SQL statement walks into a bar and sees two tables. It approaches, and asks may I join you?"
             };
 
+            // make sure Joke database is populated with starting jokes
             for (String joke : jokesArray) {
-                List<Jokes> test = repository.findByJokeIgnoreCase(joke);
+                List<Jokes> test = repository.findByJokeIgnoreCase(joke);  // JPA lookup
                 if (test.size() == 0)
-                    repository.save(new Jokes(null, joke));
+                    repository.save(new Jokes(null, joke)); //JPA save
             }
             
         };

@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-@RestController
+@RestController // annotation to simplify the creation of RESTful web services
 @RequestMapping("/api/jokes")
 public class JokesApiController {
 
-    // Autowired enables Control to connect HTML and POJO Object to database easily for CRUD
+    // Autowired enables Control to connect HTML and POJO Object to database easily for CRUD operations
     @Autowired
     private JokesJpaRepository repository;
 
