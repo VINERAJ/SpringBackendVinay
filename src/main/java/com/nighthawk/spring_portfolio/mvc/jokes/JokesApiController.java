@@ -21,6 +21,6 @@ public class JokesApiController {
      */
     @GetMapping("/all")
     public ResponseEntity<List<Jokes>> getJokes() {
-        return new ResponseEntity<>( repository.findAllByOrderByNameAsc(), HttpStatus.OK);
+        return new ResponseEntity<>( repository.findAllByOrderByJokeAsc(), HttpStatus.OK);
     }
 }

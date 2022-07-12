@@ -16,5 +16,5 @@ public class Jokes {
     private Long id;
 
     @Column(unique=true)
-    private String name;
+    private String joke;
 }
