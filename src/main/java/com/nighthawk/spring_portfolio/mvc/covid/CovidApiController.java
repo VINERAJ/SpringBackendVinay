@@ -13,23 +13,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController // annotation to simplify the creation of RESTful web services
-@RequestMapping("/api/covid")
+@RestController // annotation to create a RESTful web services
+@RequestMapping("/api/covid")  //prefix of API
 public class CovidApiController {
-    private JSONObject body;
-    private HttpStatus status;
-    private boolean success = false;
-    String last_run = null;
+    private JSONObject body; //last run result
+    private HttpStatus status; //last run status
+    String last_run = null; //last run day of month
 
     // GET Covid 19 Stats
-    @GetMapping("/daily")
+    @GetMapping("/daily")   //added to end of prefix as endpoint
     public ResponseEntity<JSONObject> getCovid() {
-        // logic is setup to only call API once a day, else serve it by last run
+
+        //calls API once a day, sets body and status properties
         String today = new Date().toString().substring(0,10); 
-        if (!success || !today.equals(last_run))
+        if (last_run == null || !today.equals(last_run))
         {
-            try {
-                //rapid api code
+            try {  //APIs can fail (ie Internet or Service down)
+                
+                //RapidAPI header
                 HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://corona-virus-world-and-india-data.p.rapidapi.com/api"))
                     .header("x-rapidapi-key", "dec069b877msh0d9d0827664078cp1a18fajsn2afac35ae063")
@@ -37,26 +38,26 @@ public class CovidApiController {
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
 
-                //rapid api call
+                //RapidAPI request and response
                 HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-                //using JSONParser, extract body and cast object to JSONObject
+                //JSONParser extracts text body and parses to JSONObject
                 this.body = (JSONObject) new JSONParser().parse(response.body());
-                this.status = HttpStatus.OK;
-                this.success = true;
+                this.status = HttpStatus.OK;  //200 success
                 this.last_run = today;
             }
-            catch (Exception e) {
+            catch (Exception e) {  //capture failure info
                 HashMap<String, String> status = new HashMap<>();
                 status.put("status", "RapidApi failure: " + e);
+
+                //Setup object for error
                 this.body = (JSONObject) status;
-                this.status = HttpStatus.INTERNAL_SERVER_ERROR;
-                this.success = false;
+                this.status = HttpStatus.INTERNAL_SERVER_ERROR; //500 error
                 this.last_run = null;
             }
         }
 
-        //return JSONObject in REST style
+        //return JSONObject in RESTful style
         return new ResponseEntity<>(body, status);
     }
 }
