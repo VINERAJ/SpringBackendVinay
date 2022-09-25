@@ -29,10 +29,11 @@ public class JokesApiController {
      */
     @PutMapping("/like/{id}")
     public ResponseEntity<Jokes> setLike(@PathVariable long id) {
-        Jokes joke = repository.getOne(id);
-        joke.setHaha(joke.getHaha()+1);
-        repository.save(joke);
-        return new ResponseEntity<>(joke, HttpStatus.OK);
+        Optional<Jokes> joke = repository.findById(id);
+        Jokes j = joke.get();
+        j.setHaha(j.getHaha()+1);
+        repository.save(j);
+        return new ResponseEntity<>(j, HttpStatus.OK);
     }
 
     /*
@@ -40,9 +41,10 @@ public class JokesApiController {
      */
     @PutMapping("/jeer/{id}")
     public ResponseEntity<Jokes> setJeer(@PathVariable long id) {
-        Jokes joke = repository.getOne(id);
-        joke.setBoohoo(joke.getBoohoo()+1);
-        repository.save(joke);
-        return new ResponseEntity<>(joke, HttpStatus.OK);
+        Optional<Jokes> joke = repository.findById(id);
+        Jokes j = joke.get();
+        j.setBoohoo(j.getBoohoo()+1);
+        repository.save(j);
+        return new ResponseEntity<>(j, HttpStatus.OK);
     }
 }
