@@ -1,26 +1,18 @@
 package com.nighthawk.spring_portfolio.security;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
-@EnableWebSecurity
-@RequiredArgsConstructor //RequiredArgsConstructor makes the line below be able to pass that variable in on the fly
+/*
+* To enable HTTP Security in Spring, extend the WebSecurityConfigurerAdapter. 
+*/
+@EnableWebSecurity  // Beans to enable basic Web security
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    // Provide a default configuration using configure(HttpSecurity http)
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        /* security rules ...
-            ... initial implementation is focused on protecting database information
-         */
-        http
-            .authorizeRequests()
-                .antMatchers( "/api/jokes/**").permitAll()
-        ;
-        // Cross-Site Request Forgery needs to be disabled to allow activation of JS Fetch URIs
-        http.csrf().disable();
+        http.csrf().disable();  // Cross-Site Request Forgery disable for JS Fetch URIs
     }
 }
