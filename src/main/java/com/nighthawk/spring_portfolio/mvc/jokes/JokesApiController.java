@@ -19,8 +19,28 @@ public class JokesApiController {
     /*
     GET List of Jokes
      */
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<Jokes>> getJokes() {
         return new ResponseEntity<>( repository.findAllByOrderByJokeAsc(), HttpStatus.OK);
+    }
+
+    /*
+    Update Like
+     */
+    @PostMapping("/like/{id}")
+    public ResponseEntity<Jokes> setLike(@PathVariable long id) {
+        Jokes joke = repository.getOne(id);
+        joke.setHaha(joke.getHaha()+1);
+        return new ResponseEntity<>(joke, HttpStatus.OK);
+    }
+
+    /*
+    Update Jeer
+     */
+    @PostMapping("/jeer/{id}")
+    public ResponseEntity<Jokes> setJeer(@PathVariable long id) {
+        Jokes joke = repository.getOne(id);
+        joke.setBoohoo(joke.getBoohoo()+1);
+        return new ResponseEntity<>(joke, HttpStatus.OK);
     }
 }
