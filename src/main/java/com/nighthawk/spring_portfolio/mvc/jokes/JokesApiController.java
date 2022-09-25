@@ -27,20 +27,22 @@ public class JokesApiController {
     /*
     Update Like
      */
-    @PostMapping("/like/{id}")
+    @PutMapping("/like/{id}")
     public ResponseEntity<Jokes> setLike(@PathVariable long id) {
         Jokes joke = repository.getOne(id);
         joke.setHaha(joke.getHaha()+1);
+        repository.save(joke);
         return new ResponseEntity<>(joke, HttpStatus.OK);
     }
 
     /*
     Update Jeer
      */
-    @PostMapping("/jeer/{id}")
+    @PutMapping("/jeer/{id}")
     public ResponseEntity<Jokes> setJeer(@PathVariable long id) {
         Jokes joke = repository.getOne(id);
         joke.setBoohoo(joke.getBoohoo()+1);
+        repository.save(joke);
         return new ResponseEntity<>(joke, HttpStatus.OK);
     }
 }
