@@ -8,7 +8,7 @@ public class APCalendar {
      * isLeapYear(2019) returns False
      * isLeapYear(2016) returns True
      */          
-    private static boolean isLeapYear(int year) {
+    public static boolean isLeapYear(int year) {
         // implementation not shown
 
         return false;
@@ -59,11 +59,11 @@ public class APCalendar {
     /** Tester method */
     public static void main(String[] args) {
         // Private access modifiers
-        System.out.println("isLeapYear: " + APCalendar.isLeapYear(2022));
         System.out.println("firstDayOfYear: " + APCalendar.firstDayOfYear(2022));
         System.out.println("dayOfYear: " + APCalendar.dayOfYear(1, 1, 2022));
 
         // Public access modifiers
+        System.out.println("isLeapYear: " + APCalendar.isLeapYear(2022));
         System.out.println("numberOfLeapYears: " + APCalendar.numberOfLeapYears(2000, 2022));
         System.out.println("dayOfWeek: " + APCalendar.dayOfWeek(1, 1, 2022));
     }
