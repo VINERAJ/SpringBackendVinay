@@ -11,8 +11,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// Pseudo Code / Implementation Prototypes 
-
+/** Calendar API
+ * Calendar Endpoint: /api/calendar/isLeapYear/2022, Returns: {"year":2020,"isLeapYear":false}
+ */
 @RestController
 @RequestMapping("/api/calendar")
 public class CalendarApiController {
