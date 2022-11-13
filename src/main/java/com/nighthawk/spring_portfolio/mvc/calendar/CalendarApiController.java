@@ -30,8 +30,8 @@ public class CalendarApiController {
       year_obj.setYear(year);  // evaluates Leap Year
 
       // Turn Year Object into JSON
-      ObjectMapper mapper = new ObjectMapper(); // this possibly could throw exception
-      JsonNode json = mapper.readTree(year_obj.isLeapYearToString());
+      ObjectMapper mapper = new ObjectMapper(); 
+      JsonNode json = mapper.readTree(year_obj.isLeapYearToString()); // this requires exception handling
 
       return ResponseEntity.ok(json);  // JSON response, see ExceptionHandlerAdvice for throws
     }
