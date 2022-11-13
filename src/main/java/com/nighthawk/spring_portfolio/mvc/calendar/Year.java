@@ -2,8 +2,8 @@ package com.nighthawk.spring_portfolio.mvc.calendar;
 
 /** Simple POJO 
  * Used to Interface with APCalendar
- * The toString method prepares object for JSON serialization
- * Note... this is not an entity
+ * The toString method(s) prepares object for JSON serialization
+ * Note... this is NOT an entity, just an abstraction
  */
 class Year {
    private int year;
@@ -29,10 +29,15 @@ class Year {
       this.isLeapYear = APCalendar.isLeapYear(year);
    }
 
-   /* toString formatted to map to JSON */
-   public String toString(){
+   /* isLeapYearToString formatted to be mapped to JSON */
+   public String isLeapYearToString(){
       return ( "{ \"year\": "  +this.year+  ", " + "\"isLeapYear\": "  +this.isLeapYear+ " }" );
    }	
+
+   /* standard toString placeholder until class is extended */
+   public String toString() { 
+      return isLeapYearToString(); 
+   }
 
    public static void main(String[] args) {
       Year year = new Year();

@@ -19,21 +19,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CalendarApiController {
 
     /** GET isLeapYear endpoint
-     * ObjectMapper throws exceptions which should return 500 error
-     * @throws JsonProcessingException
-     * @throws JsonMappingException
+     * ObjectMapper throws exceptions on bad JSON
+     *  @throws JsonProcessingException
+     *  @throws JsonMappingException
      */
     @GetMapping("/isLeapYear/{year}")
     public ResponseEntity<JsonNode> getIsLeapYear(@PathVariable int year) throws JsonMappingException, JsonProcessingException {
-      // Backend Year Object, evaluates Leap Year
+      // Backend Year Object
       Year year_obj = new Year();
-      year_obj.setYear(year);
+      year_obj.setYear(year);  // evaluates Leap Year
 
-      // Turn Year Object toString into JSON
-      ObjectMapper mapper = new ObjectMapper(); // should move this under Try/Catch, but risk is low
-      JsonNode json = mapper.readTree(year_obj.toString());
+      // Turn Year Object into JSON
+      ObjectMapper mapper = new ObjectMapper(); // this possibly could throw exception
+      JsonNode json = mapper.readTree(year_obj.isLeapYearToString());
 
-      return ResponseEntity.ok(json);  // JSON response
+      return ResponseEntity.ok(json);  // JSON response, see ExceptionHandlerAdvice for throws
     }
 
     // add other methods
