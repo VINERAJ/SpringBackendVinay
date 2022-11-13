@@ -1,6 +1,10 @@
 package com.nighthawk.spring_portfolio.mvc.calendar;
 
-// simple POJO for serializing JSON, this could be moved into an entity
+/** Simple POJO 
+ * Used to Interface with APCalendar
+ * The toString method prepares object for JSON serialization
+ * Note... this is not an entity
+ */
 class Year {
    private int year;
    private boolean isLeapYear;
