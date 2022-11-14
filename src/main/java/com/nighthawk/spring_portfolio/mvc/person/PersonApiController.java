@@ -92,4 +92,37 @@ public class PersonApiController {
         // return resulting list and status, error checking should be added
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    /*
+    The personSearch API looks across database for partial match to term (k,v) passed by RequestEntity body
+    @PostMapping(value = "/setStats/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Person> personStats(@RequestBody final Map<String,String> stat_map) {
+        // find ID
+        long id=Long.parseLong(stat_map.get("id"));  
+        Optional<Person> optional = repository.findById(id);
+        if (optional.isPresent()) {  // Good ID
+            Person person = optional.get();  // value from findByID
+
+            // Extract Attributes
+            Map<String, String> attributeMap = new HashMap<>();
+            for (Map.Entry<String,String> entry : stat_map.entrySet())  {
+                // Add all attribute other that "date" to attribute list
+                if (!entry.getKey().equals("date"))
+                    attributeMap.put(entry.getKey(), entry.getValue());
+            }
+
+            // Set Date and Attributes to "Day" HashMap
+            Map<String, Map<String, String>> date_map = new HashMap<>();
+            date_map.put( (String)stat_map.get("date"), attributeMap );
+            person.setStats(date_map);
+
+            // return Person
+            return new ResponseEntity<>(person, HttpStatus.OK);
+        }
+        // return Bad ID
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+        
+    }
+    */
+
 }

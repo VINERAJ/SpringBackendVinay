@@ -1,14 +1,30 @@
 package com.nighthawk.spring_portfolio.mvc.person;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import lombok.*;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.springframework.data.mongodb.core.schema.JsonSchemaObject.Type.JsonType;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /*
 Person is a POJO, Plain Old Java Object.
@@ -18,10 +34,12 @@ The last annotation connect to database
 --- @Entity
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@TypeDef(name="json", typeClass = JsonType.class)
 public class Person {
+    
     // automatic unique identifier for Person record
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -44,6 +62,12 @@ public class Person {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
+
+    /* 
+    @Type(type="json")
+    @Column(columnDefinition = "jsonb")
+    private Map<String,Map<String, String>> stats = new HashMap<>();
+*   */
 
     // Initializer used when setting database from an API
     public Person(String email, String password, String name, Date dob) {
