@@ -66,7 +66,7 @@ public class Person {
     
     @Type(type="json")
     @Column(columnDefinition = "jsonb")
-    private Map<String,Map<String, String>> stats = new HashMap<>(); 
+    private Map<String,Map<String, Object>> stats = new HashMap<>(); 
 
     // Initializer used when setting database from an API
     public Person(String email, String password, String name, Date dob) {
