@@ -46,7 +46,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    // email, password, roles are key to login and authentication
+    // email, password, roles are key attributes to login and authentication
     @NotEmpty
     @Size(min=5)
     @Column(unique=true)
@@ -56,7 +56,7 @@ public class Person {
     @NotEmpty
     private String password;
 
-    // @NonNull: Places this in @RequiredArgsConstructor
+    // @NonNull, etc placed in params of constructor: "@NonNull @Size(min = 2, max = 30, message = "Name (2 to 30 chars)") String name"
     @NonNull
     @Size(min = 2, max = 30, message = "Name (2 to 30 chars)")
     private String name;
@@ -64,11 +64,21 @@ public class Person {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
     
+
+    /* HashMap is used to store JSON for daily "stats"
+    "stats": {
+        "2022-11-13": {
+            "calories": 2200,
+            "steps": 8000
+        }
+    }
+    */
     @Type(type="json")
     @Column(columnDefinition = "jsonb")
     private Map<String,Map<String, Object>> stats = new HashMap<>(); 
+    
 
-    // Initializer used when setting database from an API
+    // Constructor used when building object from an API
     public Person(String email, String password, String name, Date dob) {
         this.email = email;
         this.password = password;
@@ -76,7 +86,7 @@ public class Person {
         this.dob = dob;
     }
 
-    // A custom getter to return age from dob calculation
+    // A custom getter to return age from dob attribute
     public int getAge() {
         if (this.dob != null) {
             LocalDate birthDay = this.dob.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
