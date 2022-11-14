@@ -18,8 +18,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.springframework.data.mongodb.core.schema.JsonSchemaObject.Type.JsonType;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -62,12 +63,10 @@ public class Person {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
-
-    /* 
+    
     @Type(type="json")
     @Column(columnDefinition = "jsonb")
-    private Map<String,Map<String, String>> stats = new HashMap<>();
-*   */
+    private Map<String,Map<String, String>> stats = new HashMap<>(); 
 
     // Initializer used when setting database from an API
     public Person(String email, String password, String name, Date dob) {

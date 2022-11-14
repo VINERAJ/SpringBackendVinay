@@ -95,7 +95,8 @@ public class PersonApiController {
 
     /*
     The personSearch API looks across database for partial match to term (k,v) passed by RequestEntity body
-    @PostMapping(value = "/setStats/", produces = MediaType.APPLICATION_JSON_VALUE)
+    */
+    @PostMapping(value = "/setStats", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Person> personStats(@RequestBody final Map<String,String> stat_map) {
         // find ID
         long id=Long.parseLong(stat_map.get("id"));  
@@ -123,6 +124,5 @@ public class PersonApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
         
     }
-    */
 
 }
