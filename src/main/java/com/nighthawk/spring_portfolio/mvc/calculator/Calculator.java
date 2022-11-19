@@ -62,7 +62,7 @@ public class Calculator {
     }
 
     // Test if token is an seperator
-    private boolean isSeperator(String token) {
+    private boolean isSeparator(String token) {
         // find the token in the hash map
         return SEPARATORS.containsKey(token);
     }
@@ -82,7 +82,7 @@ public class Calculator {
         StringBuilder multiCharTerm = new StringBuilder();    // term holder
         for (int i = 0; i < this.expression.length(); i++) {
             Character c = this.expression.charAt(i);
-            if ( isOperator(c.toString() ) || isSeperator(c.toString())  ) {
+            if ( isOperator(c.toString() ) || isSeparator(c.toString())  ) {
                 // 1st check for working term and add if it exists
                 if (multiCharTerm.length() > 0) {
                     tokens.add(this.expression.substring(start, i));
