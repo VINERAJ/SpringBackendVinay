@@ -61,7 +61,7 @@ public class Calculator {
         return OPERATORS.containsKey(token);
     }
 
-    // Test if token is an seperator
+    // Test if token is an separator
     private boolean isSeparator(String token) {
         // find the token in the hash map
         return SEPARATORS.containsKey(token);
