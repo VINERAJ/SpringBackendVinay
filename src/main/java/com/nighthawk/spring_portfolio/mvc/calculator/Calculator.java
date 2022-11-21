@@ -228,8 +228,8 @@ public class Calculator {
 
         System.out.println();
 
-        Calculator fractionMath = new Calculator("100.2 - 99.3");
-        System.out.println("Fraction Math\n" + fractionMath);
+        Calculator decimalMath = new Calculator("100.2 - 99.3");
+        System.out.println("Decimal Math\n" + decimalMath);
 
         System.out.println();
 
