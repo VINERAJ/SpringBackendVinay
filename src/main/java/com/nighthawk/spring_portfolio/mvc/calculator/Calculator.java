@@ -160,51 +160,31 @@ public class Calculator {
     // Takes RPN and produces a final result
     private void rpnToResult()
     {
-        // stack is used to hold calculation while using RPN rules for calculation
-        Stack<String> stack = new Stack<String>();
+        // stack is used to hold operands and each calculation
+        Stack<Double> calcStack = new Stack<Double>();
 
-        // reverse_polish is processed and ultimately used to produce final result
+        // RPN is processed, ultimately calcStack has final result
         for (String token : this.reverse_polish)
         {
-            // If the token is a number push it onto the stack
-            if (!isOperator(token))
-            {
-                stack.push(token);
-            }
-            else
+            // If the token is an operator, calculate
+            if (isOperator(token))
             {
                 // Pop the two top entries
-                Double operand1 = Double.valueOf( stack.pop() );
-                Double operand0 = Double.valueOf( stack.pop() );
 
                 // Calculate intermediate results
-                Double result;
-                switch (token) {    // token is the operator
-                    case "+":
-                        result = operand0 + operand1;
-                        break;
-                    case "-":
-                        result = operand0 - operand1;
-                        break;
-                    case "*":
-                        result = operand0 * operand1;
-                        break;
-                    case "/":
-                        result = operand0 / operand1;
-                        break;
-                    case "%":
-                        result = operand0 % operand1;
-                        break;
-                    default:    //  replace this code with errors
-                        result = 0.0;
-                }
+                result = 0.0;
 
                 // Push intermediate result back onto the stack
-                stack.push( String.valueOf( result ));
+                calcStack.push( result );
+            }
+            // else the token is a number push it onto the stack
+            else
+            {
+                calcStack.push(Double.valueOf(token));
             }
         }
         // Pop final result and set as final result for expression
-        this.result = Double.valueOf(stack.pop());
+        this.result = calcStack.pop();
     }
 
     // Print the expression, terms, and result
