@@ -241,25 +241,5 @@ public class Calculator {
         Calculator divisionMath = new Calculator("300/200");
         System.out.println("Division Math\n" + divisionMath);
 
-        System.out.println();
-
-        Calculator multiplicationMath = new Calculator("300 * 200");
-        System.out.println("Multiplication Math\n" + multiplicationMath);
-
-        System.out.println();
-
-        Calculator allMath = new Calculator("200 % 300 + 5 + 300 / 200 + 1 * 100");
-        System.out.println("All Math\n" + allMath);
-
-        System.out.println();
-
-        Calculator allMath2 = new Calculator("200 % (300 + 5 + 300) / 200 + 1 * 100");
-        System.out.println("All Math2\n" + allMath2);
-
-        System.out.println();
-
-        Calculator allMath3 = new Calculator("200%(300+5+300)/200+1*100");
-        System.out.println("All Math3\n" + allMath3);
-
     }
 }
