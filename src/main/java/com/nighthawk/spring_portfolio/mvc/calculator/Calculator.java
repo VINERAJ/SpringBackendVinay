@@ -123,7 +123,7 @@ public class Calculator {
                 case ")":
                     while (tokenStack.peek() != null && !tokenStack.peek().equals("("))
                     {
-                        reverse_polish.add( (String)tokenStack.pop() );
+                        reverse_polish.add( tokenStack.pop() );
                     }
                     tokenStack.pop();
                     break;
@@ -135,10 +135,10 @@ public class Calculator {
                     // While stack
                     // not empty AND stack top element
                     // and is an operator
-                    while (tokenStack.size() > 0 && isOperator((String) tokenStack.peek()))
+                    while (tokenStack.size() > 0 && isOperator(tokenStack.peek()))
                     {
-                        if ( isPrecedent(token, (String) tokenStack.peek() )) {
-                            reverse_polish.add((String)tokenStack.pop());
+                        if ( isPrecedent(token, tokenStack.peek() )) {
+                            reverse_polish.add(tokenStack.pop());
                             continue;
                         }
                         break;
@@ -152,7 +152,7 @@ public class Calculator {
         }
         // Empty remaining tokens
         while (tokenStack.size() > 0) {
-            reverse_polish.add((String)tokenStack.pop());
+            reverse_polish.add(tokenStack.pop());
         }
 
     }
@@ -174,8 +174,8 @@ public class Calculator {
             else
             {
                 // Pop the two top entries
-                Double operand1 = Double.valueOf( (String)stack.pop() );
-                Double operand0 = Double.valueOf( (String)stack.pop() );
+                Double operand1 = Double.valueOf( stack.pop() );
+                Double operand0 = Double.valueOf( stack.pop() );
 
                 // Calculate intermediate results
                 Double result;
@@ -204,7 +204,7 @@ public class Calculator {
             }
         }
         // Pop final result and set as final result for expression
-        this.result = Double.valueOf((String)stack.pop());
+        this.result = Double.valueOf(stack.pop());
     }
 
     // Print the expression, terms, and result
