@@ -16,13 +16,18 @@ public class LightBoard {
     }
 
     public String toString() {
-        String outString = "";
-        for (Light rows[]: lights) {
-            for (Light cell: rows) {
-                outString += cell + ",";
+        String outString = "[";
+        for (int row = 0; row < lights.length; row++) {
+            for (int col = 0; col < lights[row].length; col++) {
+                outString += "{" + 
+                "\"row\": " + row + "," +
+                "\"column\": " + col + "," +
+                "\"light\": " + lights[row][col] + 
+                "},\n";
             }
-            outString += "\n";
         }
+        // remove last comma and add square braket
+        outString = outString.substring(0,outString.length() - 2) + "]";
 		return outString;
     }
     
