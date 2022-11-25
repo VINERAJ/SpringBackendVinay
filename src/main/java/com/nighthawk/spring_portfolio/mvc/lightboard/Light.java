@@ -51,6 +51,18 @@ public class Light {
         this.effect = (short) (Math.random()*(effect+1));
     }
 
+    public String getEffectTitle() {
+        return EFFECT.get(this.effect);
+    }
+
+    public String getRGB() {
+        return ( "#" +
+         String.format("%02X", this.red) +
+         String.format("%02X", this.green) + 
+         String.format("%02X", this.blue) 
+         );
+    }
+
     /* toString output as key/values */
     public String toString() {
         return( "{" + 
