@@ -11,6 +11,8 @@ public class Light {
     short red;
     short green;
     short blue;
+    short effect;
+
     /*  ANSI effects
         n	Name	Note
         0	Reset or normal	All attributes off
@@ -24,8 +26,6 @@ public class Light {
         8	Conceal or hide	Not widely supported.
         9	Crossed-out, or strike	Characters legible but marked as if for deletion. Not supported in Terminal.app
      */
-    short effect;
-
     private final Map<Short, String> EFFECT = new HashMap<>();
     {
         // Map<"separator", not_used>
