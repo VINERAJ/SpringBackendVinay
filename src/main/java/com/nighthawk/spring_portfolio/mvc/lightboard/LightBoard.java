@@ -9,16 +9,18 @@ public class LightBoard {
     /* Initialize LightBoard and Lights */
     public LightBoard(int numRows, int numCols) {
         this.lights = new Light[numRows][numCols];
+        // 2D array nested loops, used for initialization
         for (int row = 0; row < numRows; row++) {
             for (int col = 0; col < numCols; col++) {
-                lights[row][col] = new Light();
+                lights[row][col] = new Light();  // each cell needs to be constructed
             }
         }
     }
 
-    /* Output is intended for API */
+    /* Output is intended for API key/values */
     public String toString() { 
         String outString = "[";
+        // 2D array nested loops, used for reference
         for (int row = 0; row < lights.length; row++) {
             for (int col = 0; col < lights[row].length; col++) {
                 outString += 
@@ -26,7 +28,7 @@ public class LightBoard {
                 "{" + 
                 "\"row\": " + row + "," +
                 "\"column\": " + col + "," +
-                "\"light\": " + lights[row][col] + 
+                "\"light\": " + lights[row][col] +   // extract toString data
                 "}," ;
             }
         }
@@ -38,6 +40,7 @@ public class LightBoard {
     /* Output is intended for Terminal, effects added to output */
     public String toTerminal() { 
         String outString = "[";
+        // 2D array nested loops, used for reference
         for (int row = 0; row < lights.length; row++) {
             for (int col = 0; col < lights[row].length; col++) {
                 outString += 
@@ -46,11 +49,11 @@ public class LightBoard {
                 
                 // color
                 "\033[38;2;" + 
-                lights[row][col].getRed() + ";" +
+                lights[row][col].getRed() + ";" +  // set color using getters
                 lights[row][col].getGreen() + ";" +
                 lights[row][col].getBlue() + ";" +
                 lights[row][col].getEffect() + "m" +
-                // data
+                // data, extract custom getters
                 "{" +
                 "\"" + "RGB\": " + "\"" + lights[row][col].getRGB() + "\"" +
                 "," +
@@ -117,7 +120,7 @@ public class LightBoard {
     static public void main(String[] args) {
         // create and display LightBoard
         LightBoard lightBoard = new LightBoard(5, 5);
-        System.out.println(lightBoard);
+        System.out.println(lightBoard);  // use toString() method
         System.out.println(lightBoard.toTerminal());
         System.out.println(lightBoard.toColorPaleete());
     }
