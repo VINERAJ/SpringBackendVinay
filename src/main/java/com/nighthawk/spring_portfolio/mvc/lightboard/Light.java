@@ -12,11 +12,11 @@ public class Light {
 
     public Light() {
         int maxColor = 255;
-        int intensity = 20;
+        int effect = 20;
         this.red = (short) (Math.random()*(maxColor+1));
         this.green = (short) (Math.random()*(maxColor+1));
         this.blue = (short) (Math.random()*(maxColor+1));
-        this.effect = (short) (Math.random()*(intensity+1));
+        this.effect = (short) (Math.random()*(effect+1));
     }
 
     public String toString() {
