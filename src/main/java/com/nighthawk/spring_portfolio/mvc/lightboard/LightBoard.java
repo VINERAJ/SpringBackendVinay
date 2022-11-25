@@ -65,17 +65,27 @@ public class LightBoard {
 		return outString;
     }
 
-    /* Output is intended for Terminal, effects added to output */
-    public String toLightBoard() { 
+    /* Output is intended for Terminal, draws color paleete */
+    public String toColorPaleete() {
+        // block sizes
+        final int ROWS = 5;
+        final int COLS = 10;
+
+        // Build large string for entire color paleete
         String outString = "";
+        // find each row
         for (int row = 0; row < lights.length; row++) {
-            for (int i = 0; i < 5; i++) {
+            // repeat each row for block size
+            for (int i = 0; i < ROWS; i++) {
+                // find each column
                 for (int col = 0; col < lights[row].length; col++) {
-                    for (int j = 0; j < 10; j++) {
-                        String c = (i == 2 && j == 4) 
+                    // repeat each column for block size
+                    for (int j = 0; j < COLS; j++) {
+                        // print single character, except at midpoint print color code
+                        String c = (i == (int) (ROWS / 2) && j == (int) (COLS / 2) ) 
                             ? lights[row][col].getRGB()
-                            : (j == 4) 
-                            ? " ".repeat(7)
+                            : (j == (int) (COLS / 2))  // nested ternary
+                            ? " ".repeat(lights[row][col].getRGB().length())
                             : " ";
 
                         outString += 
@@ -89,7 +99,7 @@ public class LightBoard {
                         lights[row][col].getBlue() + ";" +
                         "7m" +
 
-                        // data
+                        // color code or blank character
                         c +
 
                         // reset
@@ -106,10 +116,9 @@ public class LightBoard {
     
     static public void main(String[] args) {
         // create and display LightBoard
-        LightBoard lightBoard = new LightBoard(4, 4);
+        LightBoard lightBoard = new LightBoard(5, 5);
         System.out.println(lightBoard);
         System.out.println(lightBoard.toTerminal());
-        System.out.println(lightBoard.toLightBoard());
-
+        System.out.println(lightBoard.toColorPaleete());
     }
 }
