@@ -6,6 +6,7 @@ import lombok.Data;
 public class LightBoard {
     private Light[][] lights;
 
+    /* Initialize LightBoard and Lights */
     public LightBoard(int numRows, int numCols) {
         this.lights = new Light[numRows][numCols];
         for (int row = 0; row < numRows; row++) {
@@ -15,7 +16,8 @@ public class LightBoard {
         }
     }
 
-    public String toString() {  // this adds colors to output
+    /* Output is intended for Terminal, effects added to output */
+    public String toString() { 
         String outString = "[";
         for (int row = 0; row < lights.length; row++) {
             for (int col = 0; col < lights[row].length; col++) {
@@ -44,6 +46,7 @@ public class LightBoard {
     }
     
     static public void main(String[] args) {
+        // create and display LightBoard
         LightBoard lightBoard = new LightBoard(6, 4);
         System.out.println(lightBoard);
     }
