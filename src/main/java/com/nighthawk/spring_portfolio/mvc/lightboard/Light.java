@@ -8,10 +8,10 @@ import lombok.Data;
 @Data  // Annotations to simplify writing code (ie constructors, setters)
 public class Light {
     boolean on;
-    short red;
-    short green;
-    short blue;
-    short effect;
+    byte red;
+    byte green;
+    byte blue;
+    byte effect;
 
     /*  ANSI effects
         n	Name	Note
@@ -26,29 +26,29 @@ public class Light {
         8	Conceal or hide	Not widely supported.
         9	Crossed-out, or strike	Characters legible but marked as if for deletion. Not supported in Terminal.app
      */
-    private final Map<Short, String> EFFECT = new HashMap<>();
+    private final Map<Byte, String> EFFECT = new HashMap<>();
     {
         // Map<"separator", not_used>
-        EFFECT.put((short) 0, "Normal");
-        EFFECT.put((short) 1, "Bold");
-        EFFECT.put((short) 2, "Faint");
-        EFFECT.put((short) 3, "Italic");
-        EFFECT.put((short) 4, "Underline");
-        EFFECT.put((short) 5, "Slow Blink");
-        EFFECT.put((short) 6, "Fast Blink");
-        EFFECT.put((short) 7, "Reverse");
-        EFFECT.put((short) 8, "Conceal");
-        EFFECT.put((short) 9, "Crossed_out");
+        EFFECT.put((byte) 0, "Normal");
+        EFFECT.put((byte) 1, "Bold");
+        EFFECT.put((byte) 2, "Faint");
+        EFFECT.put((byte) 3, "Italic");
+        EFFECT.put((byte) 4, "Underline");
+        EFFECT.put((byte) 5, "Slow Blink");
+        EFFECT.put((byte) 6, "Fast Blink");
+        EFFECT.put((byte) 7, "Reverse");
+        EFFECT.put((byte) 8, "Conceal");
+        EFFECT.put((byte) 9, "Crossed_out");
     }
 
     /* Assign random colors and effects */
     public Light() {
         int maxColor = 255;
         int effect = 9;
-        this.red = (short) (Math.random()*(maxColor+1));
-        this.green = (short) (Math.random()*(maxColor+1));
-        this.blue = (short) (Math.random()*(maxColor+1));
-        this.effect = (short) (Math.random()*(effect+1));
+        this.red = (byte) (Math.random()*(maxColor+1));
+        this.green = (byte) (Math.random()*(maxColor+1));
+        this.blue = (byte) (Math.random()*(maxColor+1));
+        this.effect = (byte) (Math.random()*(effect+1));
     }
 
     /* toString output as key/values */
