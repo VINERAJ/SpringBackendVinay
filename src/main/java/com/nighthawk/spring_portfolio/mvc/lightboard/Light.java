@@ -8,14 +8,15 @@ public class Light {
     short red;
     short green;
     short blue;
-    short alpha;
+    short effect;
 
     public Light() {
         int maxColor = 255;
+        int intensity = 20;
         this.red = (short) (Math.random()*(maxColor+1));
         this.green = (short) (Math.random()*(maxColor+1));
         this.blue = (short) (Math.random()*(maxColor+1));
-        this.alpha = (short) (Math.random()*(maxColor+1));
+        this.effect = (short) (Math.random()*(intensity+1));
     }
 
     public String toString() {
@@ -23,7 +24,7 @@ public class Light {
             "\"red\": " + red + "," +
             "\"green\": " +  green + "," + 
             "\"blue\": " + blue + "," +
-            "\"alpha\": " +  alpha +
+            "\"effect\": " +  effect +
             "}" );
     }
 }

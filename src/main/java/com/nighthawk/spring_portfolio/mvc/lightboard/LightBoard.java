@@ -19,11 +19,15 @@ public class LightBoard {
         String outString = "[";
         for (int row = 0; row < lights.length; row++) {
             for (int col = 0; col < lights[row].length; col++) {
+                outString += 
+                // reset
+                "\033[m" +
                 // color
-                outString += "\033[38;2;" + 
+                "\033[38;2;" + 
                 lights[row][col].getRed() + ";" +
                 lights[row][col].getGreen() + ";" +
-                lights[row][col].getBlue() + "m" +
+                lights[row][col].getBlue() + ";" +
+                lights[row][col].getEffect() + "m" +
                 // data
                 "{" + 
                 "\"row\": " + row + "," +
