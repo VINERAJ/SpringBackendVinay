@@ -1,5 +1,8 @@
 package com.nighthawk.spring_portfolio.mvc.lightboard;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import lombok.Data;
 
 @Data  // Annotations to simplify writing code (ie constructors, setters)
@@ -23,6 +26,21 @@ public class Light {
      */
     short effect;
 
+    private final Map<Short, String> EFFECT = new HashMap<>();
+    {
+        // Map<"separator", not_used>
+        EFFECT.put((short) 0, "Normal");
+        EFFECT.put((short) 1, "Bold");
+        EFFECT.put((short) 2, "Faint");
+        EFFECT.put((short) 3, "Italic");
+        EFFECT.put((short) 4, "Underline");
+        EFFECT.put((short) 5, "Slow Blink");
+        EFFECT.put((short) 6, "Fast Blink");
+        EFFECT.put((short) 7, "Reverse");
+        EFFECT.put((short) 8, "Conceal");
+        EFFECT.put((short) 9, "Crossed_out");
+    }
+
     /* Assign random colors and effects */
     public Light() {
         int maxColor = 255;
@@ -39,7 +57,7 @@ public class Light {
             "\"red\": " + red + "," +
             "\"green\": " +  green + "," + 
             "\"blue\": " + blue + "," +
-            "\"effect\": " +  effect +
+            "\"effect\": " + "\"" + EFFECT.get(effect) + "\"" +
             "}" );
     }
 }
