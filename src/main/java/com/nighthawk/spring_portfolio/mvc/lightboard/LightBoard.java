@@ -15,19 +15,27 @@ public class LightBoard {
         }
     }
 
-    public String toString() {
+    public String toString() {  // this adds colors to output
         String outString = "[";
         for (int row = 0; row < lights.length; row++) {
             for (int col = 0; col < lights[row].length; col++) {
-                outString += "{" + 
+                // color
+                outString += "\033[38;2;" + 
+                lights[row][col].getRed() + ";" +
+                lights[row][col].getGreen() + ";" +
+                lights[row][col].getBlue() + "m" +
+                // data
+                "{" + 
                 "\"row\": " + row + "," +
                 "\"column\": " + col + "," +
                 "\"light\": " + lights[row][col] + 
-                "},\n";
+                "}," +
+                // newline
+                "\n" ;
             }
         }
-        // remove last comma and add square braket
-        outString = outString.substring(0,outString.length() - 2) + "]";
+        // remove last comma, newline, add square braket, reset color
+        outString = outString.substring(0,outString.length() - 2) + "]" + "\033[m";
 		return outString;
     }
     
