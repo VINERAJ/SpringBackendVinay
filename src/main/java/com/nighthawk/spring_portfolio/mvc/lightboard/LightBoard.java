@@ -46,6 +46,34 @@ public class LightBoard {
 		return outString;
     }
 
+    /* Output is intended for Terminal, effects added to output */
+    public String toLightBoard() { 
+        String outString = "";
+        for (int row = 0; row < lights.length; row++) {
+            for (int i = 0; i < 4; i++) {
+                for (int col = 0; col < lights[row].length; col++) {
+                    for (int j = 0; j < 8; j++)
+                        outString += 
+                        // reset
+                        "\033[m" +
+                        
+                        // color
+                        "\033[48;2;" + 
+                        lights[row][col].getRed() + ";" +
+                        lights[row][col].getGreen() + ";" +
+                        lights[row][col].getBlue() + "m" +
+                        // data
+                        " " +
+                        "\033[m";
+                }
+                outString += "\n";
+            }
+        }
+        // remove last comma, newline, add square braket, reset color
+        outString += "\033[m";
+		return outString;
+    }
+
     /* Output is intended for API */
     public String toString() { 
         String outString = "[";
@@ -67,8 +95,10 @@ public class LightBoard {
     
     static public void main(String[] args) {
         // create and display LightBoard
-        LightBoard lightBoard = new LightBoard(6, 4);
+        LightBoard lightBoard = new LightBoard(8, 8);
         System.out.println(lightBoard);
         System.out.println(lightBoard.toTerminal());
+        System.out.println(lightBoard.toLightBoard());
+
     }
 }
