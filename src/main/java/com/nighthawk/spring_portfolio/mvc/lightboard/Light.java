@@ -72,4 +72,10 @@ public class Light {
             "\"effect\": " + "\"" + EFFECT.get(effect) + "\"" +
             "}" );
     }
+
+    static public void main(String[] args) {
+        // create and display LightBoard
+        Light light = new Light();
+        System.out.println(light);  // use toString() method
+    }
 }
