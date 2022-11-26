@@ -32,7 +32,7 @@ public class LightBoard {
                 "}," ;
             }
         }
-        // remove last comma, newline, add square braket, reset color
+        // remove last comma, newline, add square bracket, reset color
         outString = outString.substring(0,outString.length() - 1) + "]";
 		return outString;
     }
@@ -63,18 +63,18 @@ public class LightBoard {
                 "\n" ;
             }
         }
-        // remove last comma, newline, add square braket, reset color
+        // remove last comma, newline, add square bracket, reset color
         outString = outString.substring(0,outString.length() - 2) + "\033[m" + "]";
 		return outString;
     }
 
-    /* Output is intended for Terminal, draws color paleete */
-    public String toColorPaleete() {
+    /* Output is intended for Terminal, draws color palette */
+    public String toColorPalette() {
         // block sizes
         final int ROWS = 5;
         final int COLS = 10;
 
-        // Build large string for entire color paleete
+        // Build large string for entire color palette
         String outString = "";
         // find each row
         for (int row = 0; row < lights.length; row++) {
@@ -112,7 +112,7 @@ public class LightBoard {
                 outString += "\n";
             }
         }
-        // remove last comma, newline, add square braket, reset color
+        // remove last comma, newline, add square bracket, reset color
         outString += "\033[m";
 		return outString;
     }
@@ -122,6 +122,6 @@ public class LightBoard {
         LightBoard lightBoard = new LightBoard(5, 5);
         System.out.println(lightBoard);  // use toString() method
         System.out.println(lightBoard.toTerminal());
-        System.out.println(lightBoard.toColorPaleete());
+        System.out.println(lightBoard.toColorPalette());
     }
 }
