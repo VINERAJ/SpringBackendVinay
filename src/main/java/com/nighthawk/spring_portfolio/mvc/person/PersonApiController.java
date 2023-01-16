@@ -1,5 +1,6 @@
 package com.nighthawk.spring_portfolio.mvc.person;
 
+// import com.nighthawk.spring_portfolio.mvc.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,6 +13,8 @@ import java.text.SimpleDateFormat;
 @RestController
 @RequestMapping("/api/person")
 public class PersonApiController {
+    //     @Autowired
+    // private JwtTokenUtil jwtGen;
     /*
     #### RESTful API ####
     Resource: https://spring.io/guides/gs/rest-service/
@@ -125,5 +128,23 @@ public class PersonApiController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
         
     }
+
+    // @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<?> createToken(@RequestBody final Map<String,Object> stat_map) {
+    //     // find ID
+    //         // System.out.println(stat_map);
+    //     String email=((String)stat_map.get("email"));
+    //     // System.out.println('a');
+    //     String password=((String)stat_map.get("password"));
+    //         // System.out.println('b');
+    //     try {
+    //         Person person = repository.findByEmailAndPassword(email, password);
+    //         return new ResponseEntity<>(jwtGen.generateToken(person), HttpStatus.OK);
+    //     } catch(Exception e) {
+    //         // return Bad ID
+    //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+    //     }
+        
+    // }
 
 }
