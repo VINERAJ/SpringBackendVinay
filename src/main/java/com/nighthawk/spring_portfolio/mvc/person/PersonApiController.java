@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -70,6 +71,7 @@ public class PersonApiController {
                                              @RequestParam("name") String name,
                                              @RequestParam("dob") String dobString) {
         Date dob;
+        password = BCrypt.hashpw(password, BCrypt.gensalt());
         try {
             dob = new SimpleDateFormat("MM-dd-yyyy").parse(dobString);
         } catch (Exception e) {
@@ -126,25 +128,5 @@ public class PersonApiController {
         }
         // return Bad ID
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
-        
     }
-
-    // @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<?> createToken(@RequestBody final Map<String,Object> stat_map) {
-    //     // find ID
-    //         // System.out.println(stat_map);
-    //     String email=((String)stat_map.get("email"));
-    //     // System.out.println('a');
-    //     String password=((String)stat_map.get("password"));
-    //         // System.out.println('b');
-    //     try {
-    //         Person person = repository.findByEmailAndPassword(email, password);
-    //         return new ResponseEntity<>(jwtGen.generateToken(person), HttpStatus.OK);
-    //     } catch(Exception e) {
-    //         // return Bad ID
-    //         return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
-    //     }
-        
-    // }
-
 }
