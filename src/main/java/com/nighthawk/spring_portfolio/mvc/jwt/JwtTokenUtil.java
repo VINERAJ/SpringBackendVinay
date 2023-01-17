@@ -1,5 +1,5 @@
 package com.nighthawk.spring_portfolio.mvc.jwt;
-// import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.util.Date;
@@ -10,30 +10,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-// @Service
-// public class JwtGenerator{
-// 	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-//     // @Value("${jwt.secret}")
-//     private final String secret = "nighthawk";
-//     public Map<String, String> generateJwt(Person user) {
-//         String jwtToken = Jwts.builder().setSubject(user.getEmail()).setIssuedAt(new Date(System.currentTimeMillis())).setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000)).signWith(SignatureAlgorithm.HS512, secret).compact();
-//         Map<String, String> jwtTokenGen = new HashMap<>();
-//         jwtTokenGen.put("token", jwtToken);
-//         return jwtTokenGen;
-//     }
-//     static public void main(String[] args) {
-//         // create and display LightBoard
-//         JwtGenerator jwtgen = new JwtGenerator();
-//         System.out.println(jwtgen.generateJwt(new Person("aidanywu@gmail.com", "password", "Aidan Wu", new java.util.GregorianCalendar(2006,4,6).getTime())));
-//     }
-// }
 @Component
 public class JwtTokenUtil {
 
 	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
-	// @Value("${jwt.secret}")
-	private String secret = "nighthawk";
+	@Value("${jwt.secret}")
+	private String secret;
 
 	//retrieve username from jwt token
 	public String getUsernameFromToken(String token) {
