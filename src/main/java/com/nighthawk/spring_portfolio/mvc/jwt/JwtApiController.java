@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nighthawk.spring_portfolio.mvc.person.Person;
+
 @RestController
 @CrossOrigin
 public class JwtApiController {
@@ -28,16 +30,11 @@ public class JwtApiController {
 	private JwtUserDetailsService jwtUserDetailsService;
 
 	@PostMapping("/authenticate")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody Map<String,String> authenticationRequest) throws Exception {
-		String email = (String) authenticationRequest.get("email");
-		String password = (String) authenticationRequest.get("password");
-		authenticate(email, password);
-		System.out.println("good email and password");
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody Person authenticationRequest) throws Exception {
+		authenticate(authenticationRequest.getEmail(), authenticationRequest.getPassword());
 		final UserDetails userDetails = jwtUserDetailsService
-				.loadUserByUsername(email);
-
+				.loadUserByUsername(authenticationRequest.getEmail());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 
@@ -45,10 +42,8 @@ public class JwtApiController {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 		} catch (DisabledException e) {
-			System.out.println("bad email and password");
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {
-			System.out.println("bad email and password");
 			throw new Exception("INVALID_CREDENTIALS", e);
 		} catch (Exception e) {
 			throw new Exception(e);
