@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,24 +31,32 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
 
-		final String requestTokenHeader = request.getHeader("Authorization");
-
+		final Cookie[] cookies = request.getCookies();
 		String username = null;
 		String jwtToken = null;
-		// JWT Token is in the form "Bearer token". Remove Bearer word and get
-		// only the Token
-		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-			jwtToken = requestTokenHeader.substring(7);
-			try {
-				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-			} catch (IllegalArgumentException e) {
-				System.out.println("Unable to get JWT Token");
-			} catch (ExpiredJwtException e) {
-				System.out.println("JWT Token has expired");
-			}
+		// Try to get cookie with name jwt
+		if ((cookies == null) || (cookies.length == 0)) {
+			logger.warn("No cookies");
 		} else {
-			logger.warn("JWT Token does not begin with Bearer String");
+			for (Cookie cookie: cookies) {
+				if (cookie.getName().equals("jwt")) {
+					jwtToken = cookie.getValue();
+				}
+			}
+			if (jwtToken == null) {
+				logger.warn("No jwt cookie");
+			} else {
+				try {
+					// Get username from the token if jwt cookie exists
+					username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+				} catch (IllegalArgumentException e) {
+					System.out.println("Unable to get JWT Token");
+				} catch (ExpiredJwtException e) {
+					System.out.println("JWT Token has expired");
+				}
+			}
 		}
+		// If no cookies have name jwt return warning
 
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

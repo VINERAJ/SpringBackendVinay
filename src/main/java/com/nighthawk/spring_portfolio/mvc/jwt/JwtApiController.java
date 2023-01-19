@@ -1,8 +1,8 @@
 package com.nighthawk.spring_portfolio.mvc.jwt;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -35,7 +35,14 @@ public class JwtApiController {
 		final UserDetails userDetails = jwtUserDetailsService
 				.loadUserByUsername(authenticationRequest.getEmail());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new JwtResponse(token));
+		final ResponseCookie tokenCookie = ResponseCookie.from("jwt", token)
+			.httpOnly(true)
+			.secure(true)
+			.path("/")
+			.maxAge(3600)
+			// .domain("example.com") // Set to backend domain
+			.build();
+		return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, tokenCookie.toString()).build();
 	}
 
 	private void authenticate(String username, String password) throws Exception {
