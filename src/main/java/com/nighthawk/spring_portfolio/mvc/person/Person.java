@@ -40,7 +40,7 @@ The last annotation connect to database
 @Entity
 @TypeDef(name="json", typeClass = JsonType.class)
 public class Person {
-    
+
     // automatic unique identifier for Person record
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
