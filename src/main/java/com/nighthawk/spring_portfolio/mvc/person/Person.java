@@ -155,4 +155,11 @@ public class Person {
         return(persons);
     }
 
+    public static void main(String[] args) {
+        Person persons[] = initPersons();
+        for( Person person : persons) {
+            System.out.println(person);
+        }
+    }
+
 }
