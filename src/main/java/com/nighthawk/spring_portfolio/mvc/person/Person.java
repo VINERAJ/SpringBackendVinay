@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import lombok.AllArgsConstructor;
@@ -65,6 +68,7 @@ public class Person {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
     
+    private Collection<Note> notes = new ArrayList<>();
 
     /* HashMap is used to store JSON for daily "stats"
     "stats": {
@@ -103,9 +107,12 @@ public class Person {
         p1.setName("Thomas Edison");
         p1.setEmail("toby@gmail.com");
         p1.setPassword("123Toby!");
+        // adding Note to notes collection
+        p1.notes.add(new Note(null, "Auto note for "+p1.getName()));
         try {  // All data that converts formats could fail
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1840");
             p1.setDob(d);
+            p1.notes.add(new Note(null, "Happy Birthday on "+p1.getDob()));
         } catch (Exception e) {
             // no actions as dob default is good enough
         }
@@ -114,6 +121,7 @@ public class Person {
         p2.setName("zAlexander Graham Bell");
         p2.setEmail("lexb@gmail.com");
         p2.setPassword("123LexB!");
+        p2.notes.add(new Note(null, "Auto note for "+p2.getName()));
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1845");
             p2.setDob(d);
@@ -124,6 +132,7 @@ public class Person {
         p3.setName("Nikola Tesla");
         p3.setEmail("niko@gmail.com");
         p3.setPassword("Niko!");
+        p3.notes.add(new Note(null, "Auto note for "+p3.getName()));
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1850");
             p3.setDob(d);
@@ -134,6 +143,7 @@ public class Person {
         p4.setName("Madam Currie");
         p4.setEmail("madam@gmail.com");
         p4.setPassword("123Madam!");
+        p4.notes.add(new Note(null, "Auto note for "+p4.getName()));
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1860");
             p4.setDob(d);
