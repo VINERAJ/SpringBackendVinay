@@ -156,9 +156,12 @@ public class Person {
     }
 
     public static void main(String[] args) {
+        // obtain Person from initializer
         Person persons[] = initPersons();
+
+        // iterate using "enhanced for loop"
         for( Person person : persons) {
-            System.out.println(person);
+            System.out.println(person);  // print object
         }
     }
 
