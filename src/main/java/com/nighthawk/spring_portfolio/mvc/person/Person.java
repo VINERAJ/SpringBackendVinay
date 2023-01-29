@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import static javax.persistence.FetchType.EAGER;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -68,6 +70,7 @@ public class Person {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
     
+    @OneToMany(fetch = EAGER)
     private Collection<Note> notes = new ArrayList<>();
 
     /* HashMap is used to store JSON for daily "stats"
@@ -100,7 +103,7 @@ public class Person {
     }
 
     // Initialize static test data 
-    public static Person[] initPersons() {
+    public static Person[] init() {
 
         // basics of class construction
         Person p1 = new Person();
@@ -118,7 +121,7 @@ public class Person {
         }
 
         Person p2 = new Person();
-        p2.setName("zAlexander Graham Bell");
+        p2.setName("Alexander Graham Bell");
         p2.setEmail("lexb@gmail.com");
         p2.setPassword("123LexB!");
         p2.notes.add(new Note(null, "Auto note for "+p2.getName()));
@@ -131,7 +134,7 @@ public class Person {
         Person p3 = new Person();
         p3.setName("Nikola Tesla");
         p3.setEmail("niko@gmail.com");
-        p3.setPassword("Niko!");
+        p3.setPassword("123Niko!");
         p3.notes.add(new Note(null, "Auto note for "+p3.getName()));
         try {
             Date d = new SimpleDateFormat("MM-dd-yyyy").parse("01-01-1850");
@@ -167,7 +170,7 @@ public class Person {
 
     public static void main(String[] args) {
         // obtain Person from initializer
-        Person persons[] = initPersons();
+        Person persons[] = init();
 
         // iterate using "enhanced for loop"
         for( Person person : persons) {
