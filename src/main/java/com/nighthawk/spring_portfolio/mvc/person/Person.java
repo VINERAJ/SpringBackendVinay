@@ -71,7 +71,7 @@ public class Person {
 
     // To be implemented
     @ManyToMany(fetch = EAGER)
-    private Collection<Role> roles = new ArrayList<>();
+    private Collection<PersonRole> roles = new ArrayList<>();
 
     /* HashMap is used to store JSON for daily "stats"
     "stats": {

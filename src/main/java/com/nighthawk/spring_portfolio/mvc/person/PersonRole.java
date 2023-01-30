@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Role {
+public class PersonRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

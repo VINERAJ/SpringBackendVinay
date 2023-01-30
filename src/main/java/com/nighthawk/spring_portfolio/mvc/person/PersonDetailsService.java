@@ -24,7 +24,7 @@ public class PersonDetailsService implements UserDetailsService {  // "implement
     @Autowired  // Inject PersonJpaRepository
     private PersonJpaRepository personJpaRepository;
     @Autowired  // Inject RoleJpaRepository
-    private RoleJpaRepository roleJpaRepository;
+    private PersonRoleJpaRepository personRoleJpaRepository;
     @Autowired  // Inject PasswordEncoder
     private PasswordEncoder passwordEncoder;
 
@@ -84,7 +84,7 @@ public class PersonDetailsService implements UserDetailsService {  // "implement
                 person.setPassword(passwordEncoder.encode(password));
             }
             if (person.getRoles().isEmpty()) {
-                Role role = roleJpaRepository.findByName(roleName);
+                PersonRole role = personRoleJpaRepository.findByName(roleName);
                 if (role != null) { // verify role
                     person.getRoles().add(role);
                 }
@@ -95,28 +95,28 @@ public class PersonDetailsService implements UserDetailsService {  // "implement
 
     /* Roles Section */
 
-    public void saveRole(Role role) {
-        Role roleObj = roleJpaRepository.findByName(role.getName());
+    public void saveRole(PersonRole role) {
+        PersonRole roleObj = personRoleJpaRepository.findByName(role.getName());
         if (roleObj == null) {  // only add if it is not found
-            roleJpaRepository.save(role);
+            personRoleJpaRepository.save(role);
         }
     }
 
-    public  List<Role>listAllRoles() {
-        return roleJpaRepository.findAll();
+    public  List<PersonRole>listAllRoles() {
+        return personRoleJpaRepository.findAll();
     }
 
-    public Role findRole(String roleName) {
-        return roleJpaRepository.findByName(roleName);
+    public PersonRole findRole(String roleName) {
+        return personRoleJpaRepository.findByName(roleName);
     }
 
     public void addRoleToPerson(String email, String roleName) { // by passing in the two strings you are giving the user that certain role
         Person person = personJpaRepository.findByEmail(email);
         if (person != null) {   // verify person
-            Role role = roleJpaRepository.findByName(roleName);
+            PersonRole role = personRoleJpaRepository.findByName(roleName);
             if (role != null) { // verify role
                 boolean addRole = true;
-                for (Role roleObj : person.getRoles()) {    // only add if user is missing role
+                for (PersonRole roleObj : person.getRoles()) {    // only add if user is missing role
                     if (roleObj.getName().equals(roleName)) {
                         addRole = false;
                         break;
