@@ -10,6 +10,7 @@ import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
+import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 import com.nighthawk.spring_portfolio.mvc.person.PersonJpaRepository;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ModelInit {
     @Autowired JokesJpaRepository jokesRepo;
     @Autowired PersonJpaRepository personRepo;
     @Autowired NoteJpaRepository noteRepo;
+    @Autowired PersonDetailsService personService;
 
     @Bean
     CommandLineRunner run() {  // The run() method will be executed after the application starts
@@ -37,7 +39,7 @@ public class ModelInit {
             for (Person person : personArray) {
                 List<Person> personFound = personRepo.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(person.getName(), person.getEmail());  // JPA lookup
                 if (personFound.size() == 0) {
-                    personRepo.save(person);  // JPA Save
+                    personService.save(person);  // JPA Save
 
                     // Each test person starts with a note
                     Person p = personRepo.findByEmail(person.getEmail());  // pull newly saved person from table

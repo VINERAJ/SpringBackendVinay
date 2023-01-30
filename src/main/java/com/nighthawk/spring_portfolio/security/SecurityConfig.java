@@ -1,6 +1,7 @@
 package com.nighthawk.spring_portfolio.security;
 
 import com.nighthawk.spring_portfolio.mvc.jwt.*;
+import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,22 +31,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@Autowired
-	private JwtUserDetailsService jwtUserDetailsService;
+	private JwtRequestFilter jwtRequestFilter;
 
 	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
-    
+	private PersonDetailsService personDetailsService;
+	
+    @Bean  // Sets up password encoding style
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		// configure AuthenticationManager so that it knows from where to load
 		// user for matching credentials
 		// Use BCryptPasswordEncoder
-		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
-	}
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		auth.userDetailsService(personDetailsService).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -54,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManagerBean();
 	}
 
+    
     // Provide a default configuration using configure(HttpSecurity http)
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {

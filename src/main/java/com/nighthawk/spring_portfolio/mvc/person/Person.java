@@ -15,7 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import static javax.persistence.FetchType.EAGER;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -25,7 +25,6 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.vladmihalcea.hibernate.type.json.JsonType;
 
 import lombok.AllArgsConstructor;
@@ -69,6 +68,10 @@ public class Person {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
+
+    // To be implemented
+    @ManyToMany(fetch = EAGER)
+    private Collection<Role> roles = new ArrayList<>();
 
     /* HashMap is used to store JSON for daily "stats"
     "stats": {
