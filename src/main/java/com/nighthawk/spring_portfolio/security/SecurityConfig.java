@@ -1,9 +1,9 @@
 package com.nighthawk.spring_portfolio.security;
 
-import com.nighthawk.spring_portfolio.mvc.jwt.*;
-import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import com.nighthawk.spring_portfolio.mvc.jwt.JwtAuthenticationEntryPoint;
+import com.nighthawk.spring_portfolio.mvc.jwt.JwtRequestFilter;
+import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,21 +56,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
     
-    // Provide a default configuration using configure(HttpSecurity http)
+    // Provide security configuration
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-        // httpSecurity.csrf().disable();
 		httpSecurity
-		        // no CSRF for this example
-                .csrf().disable()
-				// list the requests need to be authenticated
-				.authorizeRequests()
-				.antMatchers("/api/person/**").authenticated()
-				.and().
-				// make sure we use stateless session; 
-				// session won't be used to store user's state.
-				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+			// no CSRF for this example
+			.csrf().disable()
+			// list the requests/endpoints need to be authenticated
+			.authorizeRequests()
+			.antMatchers("/api/person/**").authenticated()
+			.and().
+			// make sure we use stateless session; 
+			// session won't be used to store user's state.
+			exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

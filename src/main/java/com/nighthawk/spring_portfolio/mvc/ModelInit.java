@@ -11,14 +11,12 @@ import com.nighthawk.spring_portfolio.mvc.note.Note;
 import com.nighthawk.spring_portfolio.mvc.note.NoteJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.person.Person;
 import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
-import com.nighthawk.spring_portfolio.mvc.person.PersonJpaRepository;
 
 import java.util.List;
 
 @Component // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
-    @Autowired PersonJpaRepository personRepo;
     @Autowired NoteJpaRepository noteRepo;
     @Autowired PersonDetailsService personService;
 
@@ -37,14 +35,14 @@ public class ModelInit {
             // Person database is populated with test data
             Person[] personArray = Person.init();
             for (Person person : personArray) {
-                List<Person> personFound = personRepo.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(person.getName(), person.getEmail());  // JPA lookup
+                //findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase
+                List<Person> personFound = personService.list(person.getName(), person.getEmail());  // lookup
                 if (personFound.size() == 0) {
-                    personService.save(person);  // JPA Save
+                    personService.save(person);  // save
 
-                    // Each test person starts with a note
-                    Person p = personRepo.findByEmail(person.getEmail());  // pull newly saved person from table
-                    String text = "Test " + p.getEmail();
-                    Note n = new Note(text, p);  // constructor uses new person as Many-to-One association
+                    // Each "test person" starts with a "test note"
+                    String text = "Test " + person.getEmail();
+                    Note n = new Note(text, person);  // constructor uses new person as Many-to-One association
                     noteRepo.save(n);  // JPA Save                  
                 }
             }

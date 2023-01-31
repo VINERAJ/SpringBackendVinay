@@ -48,6 +48,11 @@ public class PersonDetailsService implements UserDetailsService {  // "implement
         return personJpaRepository.findAllByOrderByNameAsc();
     }
 
+    // custom query to find match to name or email
+    public  List<Person>list(String name, String email) {
+        return personJpaRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(name, email);
+    }
+
     // custom query to find anything containing term in name or email ignoring case
     public  List<Person>listLike(String term) {
         return personJpaRepository.findByNameContainingIgnoreCaseOrEmailContainingIgnoreCase(term, term);
