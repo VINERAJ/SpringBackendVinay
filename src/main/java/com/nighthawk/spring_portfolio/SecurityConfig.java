@@ -70,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 				.antMatchers("/api/person/update/**", "/api/person/delete/**").authenticated()
+				.antMatchers("**").permitAll()
 				.and()
 			// support cors error on localhost
 			/* 
@@ -86,8 +87,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .and()
             .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/mvc/person/read")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                .logoutSuccessUrl("/")
 				.and()
 			// make sure we use stateless session; 
 			// session won't be used to store user's state.
@@ -95,7 +96,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.and()
 				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)            
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)           
 		;
 
 		// Add a filter to validate the tokens with every request
