@@ -70,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 				.antMatchers("/api/person/update/**", "/api/person/delete/**").authenticated()
-				.antMatchers("**").permitAll()
 				.and()
 			// support cors error on localhost
 			/* 
@@ -84,10 +83,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 			 */
 			.formLogin()
-                .loginPage("/login").permitAll()
+                .loginPage("/login")
                 .and()
             .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
 				.and()
 			// make sure we use stateless session; 
