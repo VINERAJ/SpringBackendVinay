@@ -66,13 +66,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity
 			// no CSRF
 			.csrf().disable()
+			/* 
 			// list the requests/endpoints need to be authenticated
 			.authorizeRequests()
 				.antMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 				.antMatchers("/api/person/update/**", "/api/person/delete/**").authenticated()
 				.and()
-			// support cors error on localhost
-			/* 
+			// support cors
 			.cors().and()
 			.headers()
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"))
@@ -81,7 +81,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization"))
 				.and()
-			 */
+			*/
 			.formLogin()
                 .loginPage("/login")
                 .and()
