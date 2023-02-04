@@ -19,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.header.writers.StaticHeadersWriter;
+//import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 
 
@@ -70,6 +70,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 				.antMatchers("/api/person/update/**", "/api/person/delete/**").authenticated()
+				.antMatchers("/api/**").permitAll()
 				.and()
 			/* 
 			// support cors on localhost
