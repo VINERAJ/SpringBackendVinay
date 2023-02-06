@@ -39,7 +39,7 @@
                     <h3 th:text="'ID: ' + ${person.id}"></h3>
                     <table>
                         <tr th:if="${person.roles.empty}">
-                            <td colspan="2"> NoRoles </td>
+                            <td colspan="2"> No Roles </td>
                         </tr>
                         <tr th:each="role : ${person.roles}">
                             <td><span th:text="${role.name}"> Name </span></td>
