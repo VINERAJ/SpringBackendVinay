@@ -74,7 +74,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			// support cors on localhost
 			.cors().and()
 			.headers()
-				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:4000", "https://nighthawkcoders.github.io"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST, GET", "OPTIONS", "HEAD"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept"))
 				.and()
