@@ -71,13 +71,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/mvc/person/update/**", "/mvc/person/delete/**").authenticated()
 				.antMatchers("/api/person/**").authenticated()
 				.and()
-			// support cors on localhost
+			// support cors
 			.cors().and()
 			.headers()
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-ExposedHeaders", "*", "Authorization"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Content-Type", "Authorization", "x-csrf-token"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-MaxAge", "600"))
+				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST", "GET", "OPTIONS", "HEAD"))
 				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "http://localhost:4000", "https://nighthawkcoders.github.io"))
-				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST, GET", "OPTIONS", "HEAD"))
-				.addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept"))
 				.and()
 			.formLogin()
                 .loginPage("/login")
