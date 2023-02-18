@@ -11,7 +11,6 @@
 #### * Add some color and fun through VANTA Visuals (birds, halo, solar, net)
 #### * Show some practical and fun links (hrefs) like Twitter, Git, Youtube
 #### * Show student project specific links (hrefs) per page
-#### * Show student TPT ideas
 #### * Show student About me pages
 
 
