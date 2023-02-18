@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.dataStructures;
+package com.nighthawk.hacks.classDataStruct;
 
 /**
  * Stack: custom implementation

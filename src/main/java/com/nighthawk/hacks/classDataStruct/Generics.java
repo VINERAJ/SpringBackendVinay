@@ -1,21 +1,19 @@
-package com.nighthawk.spring_portfolio.dataStructures;
+package com.nighthawk.hacks.classDataStruct;
 
 import lombok.Getter;
 import lombok.Setter;
 
-/* This is wrapper class...
+/** This is wrapper class...
  Objective would be to push more functionality into this Class to enforce consistent definition
  */
 @Getter
 @Setter
 public abstract class Generics {
 	public final String masterType = "Generic";
-	private String type;	// extender should define themself
+	private String type;	// extender should define themselves
 
 	// generic enumerated interface
-	public interface KeyTypes {
-		String name();
-	}
+	public interface KeyTypes { String name(); }
 	protected abstract KeyTypes getKey();  	// this method helps force usage of KeyTypes
 
 	// this method is used to establish key order
@@ -30,13 +28,13 @@ public abstract class Generics {
 		if (objs.length > 0) {
 			Generics obj = objs[0];	// Look at properties of 1st element
 			System.out.println(
-					obj.getMasterType() +
-					":" + obj.getType() +
+					obj.getMasterType() + ":" + 
+					obj.getType() +
 					" listed by " +
 					obj.getKey());
 		}
 
-		// print 'Object'
+		// print each 'Object'
 		for(Object o : objs)
 			System.out.println(o);
 

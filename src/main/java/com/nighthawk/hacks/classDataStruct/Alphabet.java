@@ -1,4 +1,4 @@
-package com.nighthawk.spring_portfolio.dataStructures;
+package com.nighthawk.hacks.classDataStruct;
 
 public class Alphabet extends Generics {
 	// Class data
@@ -59,11 +59,11 @@ public class Alphabet extends Generics {
 
 		// print with title
 		Alphabet.setOrder(KeyType.title);
-		Animal.print(objs);
+		Alphabet.print(objs);
 
 		// print letter only
 		Alphabet.setOrder(KeyType.letter);
-		Animal.print(objs);
+		Alphabet.print(objs);
 	}
 	
 }
