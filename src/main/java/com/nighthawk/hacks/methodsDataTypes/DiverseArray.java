@@ -1,4 +1,4 @@
-package com.nighthawk.hacks.controlArraysTrivia;
+package com.nighthawk.hacks.methodsDataTypes;
 
 // DiverseArray learnings
 /* All Array and 2D array questions will have similar patterns

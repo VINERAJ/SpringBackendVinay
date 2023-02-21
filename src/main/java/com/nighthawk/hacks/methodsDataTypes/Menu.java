@@ -1,4 +1,4 @@
-package com.nighthawk.hacks.controlArraysTrivia;
+package com.nighthawk.hacks.methodsDataTypes;
 
 import java.util.HashMap;
 import java.util.Map;

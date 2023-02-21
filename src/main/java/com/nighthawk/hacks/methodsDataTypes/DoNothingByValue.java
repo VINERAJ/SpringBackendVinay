@@ -1,4 +1,4 @@
-package com.nighthawk.hacks.controlArraysTrivia;
+package com.nighthawk.hacks.methodsDataTypes;
 
 public class DoNothingByValue {
     public int[] arr;
