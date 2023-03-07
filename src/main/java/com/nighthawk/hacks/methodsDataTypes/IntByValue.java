@@ -1,6 +1,6 @@
 package com.nighthawk.hacks.methodsDataTypes;
 
-public class PassByValue {
+public class IntByValue {
     
     public static void changeInt(int n) {
         System.out.println("In changeInt method");

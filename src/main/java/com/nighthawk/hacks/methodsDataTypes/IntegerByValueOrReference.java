@@ -1,6 +1,6 @@
 package com.nighthawk.hacks.methodsDataTypes;
 
-public class PassByValueOrReference {
+public class IntegerByValueOrReference {
     
     public static void changeInteger(Integer n) {
         System.out.println("In changeInteger method");
