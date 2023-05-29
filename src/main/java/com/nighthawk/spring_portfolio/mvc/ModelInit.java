@@ -2,6 +2,7 @@ package com.nighthawk.spring_portfolio.mvc;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +15,8 @@ import com.nighthawk.spring_portfolio.mvc.person.PersonDetailsService;
 
 import java.util.List;
 
-@Component // Scans Application for ModelInit Bean, this detects CommandLineRunner
+@Component
+@Configuration // Scans Application for ModelInit Bean, this detects CommandLineRunner
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
     @Autowired NoteJpaRepository noteRepo;
