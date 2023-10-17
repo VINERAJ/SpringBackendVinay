@@ -5,10 +5,13 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Base64;
 import java.util.function.Function;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import javax.crypto.*;
+
 
 @Component
 public class JwtTokenUtil {
@@ -17,6 +20,8 @@ public class JwtTokenUtil {
 
 	@Value("${jwt.secret}")
 	private String secret;
+
+	private SecretKey k = Keys.hmacShaKeyFor(Base64.getDecoder().decode(this.secret));
 
 	//retrieve username from jwt token
 	public String getUsernameFromToken(String token) {
@@ -34,7 +39,7 @@ public class JwtTokenUtil {
 	}
     //for retrieving any information from token we will need the secret key
 	private Claims getAllClaimsFromToken(String token) {
-		return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+		return Jwts.parser().verifyWith(k).build().parseSignedClaims(token).getPayload();
 	}
 
 	//check if the token has expired
@@ -56,9 +61,9 @@ public class JwtTokenUtil {
 	//   compaction of the JWT to a URL-safe string 
 	private String doGenerateToken(Map<String, Object> claims, String subject) {
 
-		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-				.signWith(SignatureAlgorithm.HS512, secret).compact();
+		return Jwts.builder().claims(claims).subject(subject).issuedAt(new Date(System.currentTimeMillis()))
+				.expiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
+				.signWith(k).compact();
 	}
 
 	//validate token
