@@ -23,9 +23,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 
-
 /*
-* To enable HTTP Security in Spring, extend the WebSecurityConfigurerAdapter. 
+* To enable HTTP Security in Spring
 */
 @Configuration
 @EnableWebSecurity  // Beans to enable basic Web security
@@ -41,7 +40,7 @@ public class SecurityConfig {
 	@Autowired
 	private PersonDetailsService personDetailsService;
 
-    @Bean  // Sets up password encoding style
+    // @Bean  // Sets up password encoding style
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
