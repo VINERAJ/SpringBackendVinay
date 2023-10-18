@@ -23,7 +23,6 @@ public class JwtTokenUtil {
 
 	private SecretKey getSecretKey() {
 		byte[] ptsecret = Base64.getDecoder().decode(this.secret);
-		System.out.println(ptsecret);
 		SecretKey k = Keys.hmacShaKeyFor(ptsecret);
 		return k;
 	}
