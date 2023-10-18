@@ -21,7 +21,12 @@ public class JwtTokenUtil {
 	@Value("${jwt.secret}")
 	private String secret;
 
-	private SecretKey k = Keys.hmacShaKeyFor(Base64.getDecoder().decode(this.secret));
+	private SecretKey getSecretKey() {
+		byte[] ptsecret = Base64.getDecoder().decode(this.secret);
+		System.out.println(ptsecret);
+		SecretKey k = Keys.hmacShaKeyFor(ptsecret);
+		return k;
+	}
 
 	//retrieve username from jwt token
 	public String getUsernameFromToken(String token) {
@@ -39,7 +44,7 @@ public class JwtTokenUtil {
 	}
     //for retrieving any information from token we will need the secret key
 	private Claims getAllClaimsFromToken(String token) {
-		return Jwts.parser().verifyWith(k).build().parseSignedClaims(token).getPayload();
+		return Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token).getPayload();
 	}
 
 	//check if the token has expired
@@ -63,7 +68,7 @@ public class JwtTokenUtil {
 
 		return Jwts.builder().claims(claims).subject(subject).issuedAt(new Date(System.currentTimeMillis()))
 				.expiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-				.signWith(k).compact();
+				.signWith(getSecretKey()).compact();
 	}
 
 	//validate token
