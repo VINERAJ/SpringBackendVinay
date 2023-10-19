@@ -1,3 +1,6 @@
+## Recent Changes
+[Upgrading old dependencies to newest versions.](https://github.com/nighthawkcoders/spring_portfolio/issues/12)
+
 # [Spring Portfolio Starter](https://nighthawkcodingsociety.com/projectsearch/details/Spring%20Portfolio%20Starter)
 
 - Runtime link: https://spring.nighthawkcodingsociety.com/
