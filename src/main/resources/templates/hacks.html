@@ -1,0 +1,17 @@
+<head>
+    <title>Hacks</title>
+</head>
+
+<body>
+    <span id="conga">congrats!</span>
+    <button id="button1" style="height:50px;width:100px">Click for fun!</button>
+    <script>cd 
+        document.getElementById("button1").onclick = function(){
+            fetch("/studentq", {method: 'GET'})
+            .then(response => response.json())
+            .then((data) => {
+                document.getElementById("conga").textContent=data.hackRes;
+            });
+        }
+    </script>
+</body>

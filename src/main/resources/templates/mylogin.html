@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layouts/base}" lang="en">
+
+<head>
+    <title>Login for JWT Hacks</title>
+</head>
+
+<body>
+
+    <th:block layout:fragment="body" th:remove="tag">
+
+    <div>
+    <div class="p-5 mb-4 bg-light text-dark rounded-3">
+        <h1>Login</h1>
+        <label for="email">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password"><br><br>
+        <input type="submit" value="Login" onclick="login()">
+        <p id="message"></p>
+    </div>
+</div>
+
+<script>
+    function login() {
+        var email = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var data = {email:email, password:password};
+        fetch("/authenticate", {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).then((data) => {
+            if (data.status == 200) {
+                window.location.replace("/hacksgo");
+            } else if (data.status == 401) {
+                document.getElementById('message').innerHTML = "not authorized"
+            } else {
+                document.getElementById('message').innerHTML = "Invalid email or password"
+            }
+        });
+    }
+    
+</script>
+
+
+</th:block>
+</body>
