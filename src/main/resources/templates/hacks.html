@@ -5,7 +5,7 @@
 <body>
     <span id="conga">congrats!</span>
     <button id="button1" style="height:50px;width:100px">Click for fun!</button>
-    <script>cd 
+    <script>
         document.getElementById("button1").onclick = function(){
             fetch("/studentq", {method: 'GET'})
             .then(response => response.json())

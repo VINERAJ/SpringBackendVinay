@@ -1,46 +1,49 @@
-<!DOCTYPE HTML>
-
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{layouts/base}" lang="en">
-
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
 <head>
     <title>Login for JWT Hacks</title>
 </head>
 
-<body>
-
-    <th:block layout:fragment="body" th:remove="tag">
-
-    <div>
-    <div class="p-5 mb-4 bg-light text-dark rounded-3">
-        <h1>Login</h1>
-        <label for="email">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="text" id="password" name="password"><br><br>
-        <input type="submit" value="Login" onclick="login()">
-        <p id="message"></p>
+<body style="background-color: aqua">
+    <div th:fragment="body">
+        <div>
+            <header>
+                <span>Login Page</span>
+            </header>
+        </div>
+    
+        <div>
+            <div>
+                <div style="background-color: red">
+                    <h1>Login</h1>
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" th:value="${username}"><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" th:value="${password}"><br><br>
+                    <button onclick="login()">Login</button>
+                    <p id="message"></p>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</body>
 
-<script>
+<script th:inline="javascript">
     function login() {
-        var email = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
+        var email = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
         var data = {email:email, password:password};
-        fetch("/authenticate", {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)}).then((data) => {
-            if (data.status == 200) {
+        fetch("/authenticate", {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)})
+        .then(function(response) {
+            if (response.status == 200) {
                 window.location.replace("/hacksgo");
-            } else if (data.status == 401) {
-                document.getElementById('message').innerHTML = "not authorized"
             } else {
-                document.getElementById('message').innerHTML = "Invalid email or password"
+                document.getElementById('message').innerHTML = "Invalid email or password";
             }
+        }).catch(function(error) {
+            console.error('Error during login:', error);
         });
     }
-    
 </script>
 
-
-</th:block>
-</body>
+</html>

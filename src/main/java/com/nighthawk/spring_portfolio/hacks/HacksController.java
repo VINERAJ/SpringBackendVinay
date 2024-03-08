@@ -21,6 +21,11 @@ public class HacksController {
         return "hacks";
     }
 
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
     @GetMapping("/studentq")
     public ResponseEntity<?> getHack() {
         String hackString = Hacks.HackApi();
