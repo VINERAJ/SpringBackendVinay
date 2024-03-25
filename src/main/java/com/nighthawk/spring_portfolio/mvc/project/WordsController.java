@@ -26,11 +26,12 @@ import java.util.function.Function;
 public class WordsController {
     private WordsList wordsList = new WordsList();
     @GetMapping("/nouns")
-    public ResponseEntity<?> getOneNoun() {
+    public ResponseEntity<?> getOneNoun(String word) {
         wordsList.createHashes();
         HashMap<String, String> nouns = wordsList.getNouns();
+        String term = wordsList.getAWord(nouns, word);
         var response = new Object() {
-            public final HashMap<String, String> yeah = nouns;
+            public final String yeah = term;
         };
         return ResponseEntity.ok(response);
     }
