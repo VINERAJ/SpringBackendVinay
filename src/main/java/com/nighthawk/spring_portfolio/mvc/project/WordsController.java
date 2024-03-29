@@ -31,7 +31,19 @@ public class WordsController {
         HashMap<String, String> nouns = wordsList.getNouns();
         String term = wordsList.getAWord(nouns, word);
         var response = new Object() {
-            public final String yeah = term;
+            public final String translation = term;
+        };
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/plural")
+    public ResponseEntity<?> pluralNoun(String word) {
+        wordsList.createHashes();
+        HashMap<String, String> nouns = wordsList.getNouns();
+        String temp = wordsList.getAWord(nouns, word);
+        String term = wordsList.getConjugation(nouns, temp);
+        var response = new Object() {
+            public final String translation = term;
         };
         return ResponseEntity.ok(response);
     }
