@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class WordsList {
     HashMap<String, String> nounsList = new HashMap<String, String>();
-    public void createHashes() {
+    public WordsList() {
         ObjectMapper mapper = new ObjectMapper();
         File file = new File("list.json");
         nounsList.put("person", "lozo");
@@ -51,7 +51,7 @@ public class WordsList {
         return null;
     }
 
-    public String getConjugation(HashMap<String, String> listOfWords, String word) {
+    public String getPlural(HashMap<String, String> listOfWords, String word) {
         char[] ch = word.toCharArray();
         switch(word.charAt(word.length()-1)) {
             case 'o': 
